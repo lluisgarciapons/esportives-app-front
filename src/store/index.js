@@ -31,6 +31,7 @@ export default new Vuex.Store({
         console.log(response.data);
         commit("setError", {});
         localStorage.setItem("jwtToken", response.data.token);
+        setAuthToken(response.data.token);
         commit("isAuth", response.data.token);
       }
       catch (error) {
