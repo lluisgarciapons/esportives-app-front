@@ -9,24 +9,25 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import("../views/Home.vue"),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, title: "Esportives 2020" }
   },
   {
     path: '/nou',
     name: 'Nou Participant',
     component: () => import("../views/NouParticipant.vue"),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, title: "Esportives 2020 - Nou Participant" }
   },
   {
     path: '/llistat',
     name: 'Llistat Participants',
     component: () => import("../views/Llistat.vue"),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, title: "Esportives 2020 - Llistat Participants" }
   },
   {
     path: '/login',
     name: 'Login',
     component: () => import("../views/Login.vue"),
+    meta: { title: "Esportives 2020 - Accedeix" }
 
   },
 ];
@@ -38,15 +39,16 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log(
-    to.fullPath,
-    "authenticated: " + store.state.isAuthenticated
-  );
+  document.title = to.meta.title;
+  // console.log(
+  //   to.fullPath,
+  //   "authenticated: " + store.state.isAuthenticated
+  // );
   if (
     to.matched.some(record => record.meta.requiresAuth) &&
     !store.state.isAuthenticated
   ) {
-    console.log("redirected to login");
+    // console.log("redirected to login");
     next("/login");
   } else if (to.fullPath === "/login" && store.state.isAuthenticated) {
     next("dashboard");

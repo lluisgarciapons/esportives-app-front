@@ -158,20 +158,20 @@ export default {
     async updateUser(id) {
       try {
         this.loading = true;
-        const response = await Axios.put(
+        await Axios.put(
           `${process.env.VUE_APP_API_PROXY}/api/infants/temperatura/${id}`,
           {
             temp: this.temp
           }
         );
 
-        console.log(response);
+        // console.log(response);
         this.loading = false;
         this.error = false;
         this.dialog = false;
         this.getInfo();
       } catch (error) {
-        console.log(error.response);
+        // console.log(error.response);
         this.loading = false;
         this.error = true;
       }

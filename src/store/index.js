@@ -28,14 +28,14 @@ export default new Vuex.Store({
     async login({ commit }, payload) {
       try {
         const response = await axios.post(`${process.env.VUE_APP_API_PROXY}/api/auth/login`, payload);
-        console.log(response.data);
+        // console.log(response.data);
         commit("setError", {});
         localStorage.setItem("jwtToken", response.data.token);
         setAuthToken(response.data.token);
         commit("isAuth", response.data.token);
       }
       catch (error) {
-        console.log(error.response);
+        // console.log(error.response);
         commit("setError", error.response.data);
       }
 
@@ -49,8 +49,8 @@ export default new Vuex.Store({
               Authorization: `Bearer ${token}`
             }
           })
-          .then(res => {
-            console.log("!!!", res);
+          .then(() => {
+            // console.log("!!!", res);
 
             setAuthToken(token);
 
@@ -60,16 +60,16 @@ export default new Vuex.Store({
             context.commit("setError", {});
             context.commit("isAuth", token);
           })
-          .catch(err => {
-            console.log(err.response);
+          .catch(() => {
+            // console.log(err.response);
             context.dispatch("logout");
           });
       }
     },
     logout: context => {
-      console.log("logout");
-      axios.get(`${process.env.VUE_APP_API_PROXY}/api/auth/logout`).then(response => {
-        console.log(response);
+      // console.log("logout");
+      axios.get(`${process.env.VUE_APP_API_PROXY}/api/auth/logout`).then(() => {
+        // console.log(response);
         localStorage.removeItem("jwtToken");
         context.commit("logout");
         router.push("/login");

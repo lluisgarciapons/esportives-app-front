@@ -280,19 +280,16 @@ export default {
       };
       try {
         this.loading = true;
-        const response = await axios.post(
-          `${process.env.VUE_APP_API_PROXY}/api/infants`,
-          {
-            nouInfant
-          }
-        );
+        await axios.post(`${process.env.VUE_APP_API_PROXY}/api/infants`, {
+          nouInfant
+        });
 
-        console.log(response);
+        // console.log(response);
         this.loading = false;
         this.error = false;
         this.creat = true;
       } catch (error) {
-        console.log(error.response);
+        // console.log(error.response);
         this.loading = false;
         this.creat = false;
         this.error = true;

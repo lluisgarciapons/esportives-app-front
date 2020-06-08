@@ -68,7 +68,7 @@ export default {
   methods: {
     ...mapActions(["login"]),
     sendLogin() {
-      console.log("Login");
+      // console.log("Login");
       this.login({ user: this.user, password: this.password });
     }
   },
