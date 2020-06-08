@@ -1,18 +1,32 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-container fill-height app>
+    <v-layout fill-height column align-center justify-center>
+      <div class="my-2">
+        <v-btn x-large color="success" dark to="/nou">Afegir nou participant</v-btn>
+      </div>
+      <div class="my-2">
+        <v-btn x-large color="success" dark to="/llistat">Veure participants</v-btn>
+      </div>
+      <div class="ma-5 sortir" @click="sortir">Sortir</div>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import { mapActions } from "vuex";
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  methods: {
+    ...mapActions(["logout"]),
+    sortir() {
+      this.logout();
+    }
   }
-}
+};
 </script>
+
+<style>
+.sortir {
+  color: #666666;
+  text-decoration: underline;
+}
+</style>

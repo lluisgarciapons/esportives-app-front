@@ -1,29 +1,56 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import store from "../store/index";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-  const routes = [
+const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import("../views/Home.vue"),
+    meta: { requiresAuth: true }
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+    path: '/nou',
+    name: 'Nou Participant',
+    component: () => import("../views/NouParticipant.vue"),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/llistat',
+    name: 'Llistat Participants',
+    component: () => import("../views/Llistat.vue"),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import("../views/Login.vue"),
+
+  },
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  console.log(
+    to.fullPath,
+    "authenticated: " + store.state.isAuthenticated
+  );
+  if (
+    to.matched.some(record => record.meta.requiresAuth) &&
+    !store.state.isAuthenticated
+  ) {
+    console.log("redirected to login");
+    next("/login");
+  } else if (to.fullPath === "/login" && store.state.isAuthenticated) {
+    next("dashboard");
+  } else next();
+});
+
+export default router;
