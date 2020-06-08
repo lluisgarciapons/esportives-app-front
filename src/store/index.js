@@ -44,7 +44,7 @@ export default new Vuex.Store({
       if (token !== undefined && token !== "") {
         // Set Token to Auth Header
         axios
-          .get("/api/auth", {
+          .get(`${process.env.VUE_APP_API_PROXY}/api/auth`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -68,7 +68,7 @@ export default new Vuex.Store({
     },
     logout: context => {
       console.log("logout");
-      axios.get("/api/auth/logout").then(response => {
+      axios.get(`${process.env.VUE_APP_API_PROXY}/api/auth/logout`).then(response => {
         console.log(response);
         localStorage.removeItem("jwtToken");
         context.commit("logout");
