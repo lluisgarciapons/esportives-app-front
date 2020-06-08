@@ -9,7 +9,11 @@ module.exports = {
   //   }
   // },
   devServer: {
-    proxy: "https://esportives-app.herokuapp.com/"
+    proxy: {
+      "^/api": {
+        target: "https://esportives-app.herokuapp.com/"
+      }
+    }
   },
   "transpileDependencies": [
     "vuetify"
