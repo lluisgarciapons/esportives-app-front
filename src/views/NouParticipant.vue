@@ -280,9 +280,12 @@ export default {
       };
       try {
         this.loading = true;
-        const response = await axios.post("/api/infants", {
-          nouInfant
-        });
+        const response = await axios.post(
+          `${process.env.VUE_APP_API_PROXY}/api/infants`,
+          {
+            nouInfant
+          }
+        );
 
         console.log(response);
         this.loading = false;

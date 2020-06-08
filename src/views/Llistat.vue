@@ -130,7 +130,9 @@ export default {
       });
     },
     async getInfo() {
-      const response = await Axios.get("/api/infants");
+      const response = await Axios.get(
+        `${process.env.VUE_APP_API_PROXY}/api/infants`
+      );
       this.infants = response.data.infants;
     },
     hasTempToday(temps) {
@@ -156,9 +158,12 @@ export default {
     async updateUser(id) {
       try {
         this.loading = true;
-        const response = await Axios.put(`/api/infants/temperatura/${id}`, {
-          temp: this.temp
-        });
+        const response = await Axios.put(
+          `${process.env.VUE_APP_API_PROXY}/api/infants/temperatura/${id}`,
+          {
+            temp: this.temp
+          }
+        );
 
         console.log(response);
         this.loading = false;

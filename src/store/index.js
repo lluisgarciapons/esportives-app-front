@@ -27,7 +27,7 @@ export default new Vuex.Store({
   actions: {
     async login({ commit }, payload) {
       try {
-        const response = await axios.post("/api/auth/login", payload);
+        const response = await axios.post(`${process.env.VUE_APP_API_PROXY}/api/auth/login`, payload);
         console.log(response.data);
         commit("setError", {});
         localStorage.setItem("jwtToken", response.data.token);

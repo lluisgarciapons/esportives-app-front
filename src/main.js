@@ -11,6 +11,8 @@ loadProgressBar();
 
 Vue.config.productionTip = false;
 
+console.log(process.env.VUE_APP_API_PROXY);
+
 new Vue({
   router,
   store,
