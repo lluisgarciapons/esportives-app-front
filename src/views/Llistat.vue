@@ -140,7 +140,8 @@ export default {
       const today = new Date(
         rightNow.getFullYear(),
         rightNow.getMonth(),
-        rightNow.getDate()
+        rightNow.getDate(),
+        2
       );
       const localTime = today.getTime();
       const localOffset = today.getTimezoneOffset() * 60000;
