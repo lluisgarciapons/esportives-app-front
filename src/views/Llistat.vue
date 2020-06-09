@@ -142,8 +142,11 @@ export default {
         rightNow.getMonth(),
         rightNow.getDate()
       );
+      const localTime = today.getTime();
+      const localOffset = today.getTimezoneOffset() * 60000;
+      const utc = localTime + localOffset;
 
-      const found = temps.find(t => t.dia == today.getTime());
+      const found = temps.find(t => t.dia == utc);
 
       if (found) {
         return found.temperatura;
