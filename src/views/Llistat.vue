@@ -140,12 +140,11 @@ export default {
       const today = new Date(
         rightNow.getFullYear(),
         rightNow.getMonth(),
-        rightNow.getDate(),
-        2
+        rightNow.getDate()
       );
       const localTime = today.getTime();
       const localOffset = today.getTimezoneOffset() * 60000;
-      const utc = localTime + localOffset;
+      const utc = localTime - localOffset;
 
       const found = temps.find(t => t.dia == utc);
 
