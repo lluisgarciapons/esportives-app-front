@@ -27,7 +27,9 @@ export default {
   },
   methods: {
     async findInfo() {
-      const response = await Axios.get(`/api/infants/${this.id}`);
+      const response = await Axios.get(
+        `${process.env.VUE_APP_API_PROXY}/api/infants/${this.id}`
+      );
       console.log(response.data);
       this.infant = response.data.infant;
       this.loaded = true;
