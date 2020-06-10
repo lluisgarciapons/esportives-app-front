@@ -17,7 +17,9 @@ pullDownHeight: '100'
           <div v-for="(infant, index) in filter" :key="infant.nom">
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title v-text="infant.nom"></v-list-item-title>
+                <router-link :to="`/detallParticipant/${infant._id}`">
+                  <v-list-item-title v-text="infant.nom"></v-list-item-title>
+                </router-link>
               </v-list-item-content>
 
               <v-list-item-action class="align-start" v-if="hasTempToday(infant.temperatures)">

@@ -5,6 +5,9 @@
       <v-btn icon to="/">
         <v-icon>mdi-home</v-icon>
       </v-btn>
+      <v-btn v-if="$router.history.current.name == 'Detall Participant'" icon to="/llistat">
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn>
 
       <v-spacer></v-spacer>
       <v-toolbar-title>Colònies Esportives Sallent</v-toolbar-title>
@@ -14,7 +17,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    isDetail() {
+      console.log(this.$router);
+      return this.$router.history.current.name == "Detall Participant";
+    }
+  }
+};
 </script>
 
 <style>

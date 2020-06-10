@@ -19,7 +19,7 @@ export default new Vuex.Store({
     canviCurs: (state, payload) => state.curs = payload,
     isAuth: (state, payload) => {
       state.isAuthenticated = !isEmpty(payload);
-      router.push("/");
+      router.push(localStorage.getItem("lastRoute"));
     },
     logout: state => state.isAuthenticated = false,
     setError: (state, payload) => state.error = payload

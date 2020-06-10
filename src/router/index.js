@@ -30,6 +30,14 @@ const routes = [
     meta: { title: "Esportives 2020 - Accedeix" }
 
   },
+  {
+    path: '/detallParticipant/:id',
+    name: 'Detall Participant',
+    props: true,
+    component: () => import("../views/Detail.vue"),
+    meta: { requiresAuth: true, title: "Esportives 2020 - Informació Participant" }
+
+  },
 ];
 
 const router = new VueRouter({
@@ -44,6 +52,12 @@ router.beforeEach((to, from, next) => {
   //   to.fullPath,
   //   "authenticated: " + store.state.isAuthenticated
   // );
+
+  if (
+    to.matched.some(record => record.meta.requiresAuth)) {
+    localStorage.setItem("lastRoute", to.fullPath);
+  }
+
   if (
     to.matched.some(record => record.meta.requiresAuth) &&
     !store.state.isAuthenticated
@@ -51,8 +65,11 @@ router.beforeEach((to, from, next) => {
     // console.log("redirected to login");
     next("/login");
   } else if (to.fullPath === "/login" && store.state.isAuthenticated) {
-    next("dashboard");
-  } else next();
+    next("/");
+  } else {
+
+    next();
+  }
 });
 
 export default router;

@@ -11,7 +11,7 @@ module.exports = {
   devServer: {
     proxy: {
       "^/api": {
-        target: "https://esportives-app.herokuapp.com/"
+        target: "http://localhost:5000"
       }
     }
   },
