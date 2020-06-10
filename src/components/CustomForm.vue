@@ -368,9 +368,12 @@ export default {
     async editInfo() {
       try {
         this.loading = true;
-        await axios.put(`/api/infants/update/${this.infant._id}`, {
-          infant: this.infant
-        });
+        await axios.put(
+          `${process.env.VUE_APP_API_PROXY}/api/infants/update/${this.infant._id}`,
+          {
+            infant: this.infant
+          }
+        );
         this.error = { success: true };
         this.editat = true;
         setTimeout(() => {
@@ -391,7 +394,9 @@ export default {
       if (r) {
         try {
           this.loading = true;
-          await axios.delete(`/api/infants/${this.infant._id}`);
+          await axios.delete(
+            `${process.env.VUE_APP_API_PROXY}/api/infants/${this.infant._id}`
+          );
           this.$router.push("/llistat");
         } catch (error) {
           this.loading = false;
